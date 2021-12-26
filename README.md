@@ -1,4 +1,4 @@
-Import
-pip install django
-pip install django-bootstrap4
-pip install django-money
+Import\n
+pip install django\n
+pip install django-bootstrap4\n
+pip install django-money\n
