@@ -5,8 +5,15 @@
   <div class="jumbotron">
     <h1 class="display-3">Lista zamówień:</h1>
 
-    <p class="lead">Zamówienie 1 </p>
-      <p class="lead">Zamówienie 2 </p>
+  <ul>
+    {% for order in orders %}
+      <li><h3>
+        <a href="{% url 'order:order_list'  %}">{{ order }}</a>
+      </h3></li>
+    {% empty %}
+      <li><h3>Brak dodanych zamówień.</h3></li>
+    {% endfor %}
+  </ul>
 
   </div>
 {% endblock page_header %}
