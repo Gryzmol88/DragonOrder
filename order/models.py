@@ -1,4 +1,6 @@
 from django.db import models
+from djmoney.models.fields import MoneyField
+
 
 class Order(models.Model):
     STATUS_CHOICES_ORDER = (
@@ -16,10 +18,10 @@ class Order(models.Model):
     name = models.CharField(max_length=200)
     date_of_order = models.DateField()
     status = models.CharField(max_length=15, choices=STATUS_CHOICES_ORDER, default='W przygotowaniu')
-    product_price = models.IntegerField()
-    transport_price = models.IntegerField()
-    current_transport_price = models.CharField(max_length=3, choices=CURRENT_CHOICES, default='USD')
-    customs_price = models.IntegerField()
+    product_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
+    transport_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
+    current_transport_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
+    customs_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
     total_weight = models.IntegerField()
 
     class Meta:
@@ -28,3 +30,14 @@ class Order(models.Model):
 
     def __str__(self):
         return self.name
+
+class Product(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product_name = models.CharField(max_length=100)
+    weight = models.IntegerField()
+    purchase_row_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
+    quantity = models.IntegerField()
+    purchase_final_price = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN')
+
+    def __str__(self):
+        return self.product_name

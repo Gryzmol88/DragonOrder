@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def index(request):
+    return render(request, 'order/index.html')
+
+def order_list(request):
+    return render(request, 'order/order_list.html')
