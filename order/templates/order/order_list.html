@@ -1,19 +1,30 @@
-
 {% extends "order/base.html" %}
 
 {% block page_header %}
   <div class="jumbotron">
     <h1 class="display-3">Lista zamówień:</h1>
+  </div>
+{% endblock page_header %}
 
-  <ul>
+    <div>
+      {% block content %}
+        <ul>
     {% for order in orders %}
-      <li><h3>
+
+      <li><h4>
         <a href="{% url 'order:order_list'  %}">{{ order }}</a>
-      </h3></li>
-    {% empty %}
+      </h4></li>
+    <p>Data:  {{ order.date_of_order }}</p>
+    <p>Status:  {{ order.status }}</p>
+
+{% empty %}
       <li><h3>Brak dodanych zamówień.</h3></li>
     {% endfor %}
   </ul>
 
-  </div>
-{% endblock page_header %}
+      {% include "order/pagination.html" with page=orders %}
+      {% endblock content %}
+    </div>
+
+
+
