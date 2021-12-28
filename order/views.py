@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Order
+from .models import Order, Product
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
@@ -17,3 +17,8 @@ def order_list(request):
         orders = paginator.page(paginator.num_pages)
     context = {'orders': orders, 'page': page}
     return render(request, 'order/order_list.html', context)
+
+def order_products(request, order_id):
+    order_products = Order.objects.get(id=order_id)
+    context = {'order_products': order_products}
+    return render(request, 'order/order_products.html', context)

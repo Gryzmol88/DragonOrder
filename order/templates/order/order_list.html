@@ -3,6 +3,7 @@
 {% block page_header %}
   <div class="jumbotron">
     <h1 class="display-3">Lista zamówień:</h1>
+      <p>Dodaj nowe Zamówienie      Usuń Zamówienie</p>
   </div>
 {% endblock page_header %}
 
@@ -12,10 +13,11 @@
     {% for order in orders %}
 
       <li><h4>
-        <a href="{% url 'order:order_list'  %}">{{ order }}</a>
+        <a href="{% url 'order:order_products' order.id %}">{{ order }}</a>
       </h4></li>
     <p>Data:  {{ order.date_of_order }}</p>
     <p>Status:  {{ order.status }}</p>
+            <p>ID:  {{ order.id }}</p>
 
 {% empty %}
       <li><h3>Brak dodanych zamówień.</h3></li>
