@@ -23,3 +23,8 @@ def order_products(request, order_id):
     products = Product.objects.filter(order=order_id)
     context = {'order_products': order_products, 'products': products}
     return render(request, 'order/order_products.html', context)
+
+def new_order(request):
+    order_products = Order.objects.all
+    context = {'order_products': order_products}
+    return render(request, 'order/new_order.html', context)
