@@ -20,5 +20,6 @@ def order_list(request):
 
 def order_products(request, order_id):
     order_products = Order.objects.get(id=order_id)
-    context = {'order_products': order_products}
+    products = Product.objects.filter(order=order_id)
+    context = {'order_products': order_products, 'products': products}
     return render(request, 'order/order_products.html', context)

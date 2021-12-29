@@ -1,15 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "order/base.html" %}
+
+{% block page_header %}
+  <div class="jumbotron">
+    <h1 class="display-3">Lista produktów:</h1>
+  </div>
+{% endblock page_header %}
+
+
+    <div>
+      {% block content %}
+        <h2>Zamówienie: {{order_products}}</h2>
+        <ul>
+{%for product in products %}
+
+    <li><h3>Produkt:  {{ product }}</h3>
+        <p>Ilość Zamówiona: {{product.quantity}}</p>
+        <p>Cena: {{product.purchase_final_price}}</p>
+    </li>
+
+
+{% empty %}
+      <li><h3>Brak Produktów.</h3></li>
+    {% endfor %}
+  </ul>
+
+      {% endblock content %}
+    </div>
 
 
 
-    <h1>{{order_products}}</h1>
 
 
-</body>
-</html>
