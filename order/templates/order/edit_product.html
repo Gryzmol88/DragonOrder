@@ -6,8 +6,8 @@
   <form action="{% url 'order:edit_product' product.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
-    <button name="submit">Zapisz zmiany</button>
+    <button name="submit" class="btn btn-success">Zapisz zmiany</button>
   </form>
-<a href="{% url 'order:delete_product' product.id %}">Usuń produkt</a>
+<a href="{% url 'order:delete_product' product.id %}" class="btn btn-danger">Usuń produkt</a>
 
 {% endblock content %}

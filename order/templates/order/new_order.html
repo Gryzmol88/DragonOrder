@@ -3,10 +3,10 @@
 {% block content %}
   <p>Dodanie nowego zamówienia:</p>
     
-  <form action="{% url 'order:new_order' %}" method='post'>
+  <form action="{% url 'order:new_order' %}" method='post' class="form-horizontal">
     {% csrf_token %}
     {{ form.as_p }}
-    <button name="submit">Zapisz</button>
+    <button name="submit" class="btn btn-success">Zapisz</button>
   </form>
     
 {% endblock content %}

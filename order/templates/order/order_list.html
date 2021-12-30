@@ -15,7 +15,7 @@
       <li><h4>
         <a href="{% url 'order:order_products' order.id %}">{{ order }}</a>
       </h4></li>
-           <a href="{% url 'order:edit_order' order.id %}">Edytuj zamówienie</a>
+           <a href="{% url 'order:edit_order' order.id %}" class="btn btn-info">Edytuj zamówienie</a>
     <p>Data:  {{ order.date_of_order }}</p>
     <p>Status:  {{ order.status }}</p>
             <p>ID:  {{ order.id }}</p>

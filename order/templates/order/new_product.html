@@ -6,7 +6,7 @@
   <form action="{% url 'order:new_product' order.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
-    <button name="submit">Zapisz</button>
+    <button name="submit" class="btn btn-success">Zapisz</button>
   </form>
     
 {% endblock content %}

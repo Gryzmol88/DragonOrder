@@ -17,7 +17,7 @@
     <li><h3>Produkt:  {{ product }}</h3>
         <p>Ilość Zamówiona: {{product.quantity}}</p>
         <p>Cena: {{product.purchase_final_price}}</p>
-        <a href="{% url 'order:edit_product' product.id %}">Edytuj produkt</a>
+        <a href="{% url 'order:edit_product' product.id %}" class="btn btn-info">Edytuj produkt</a>
     </li>
 
 
