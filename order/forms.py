@@ -12,13 +12,15 @@ class OrderForm(forms.ModelForm):
         labels = {
             'name': 'Nazwa zamówienia:',
             'date_of_order': 'Data zakupu',
-            'status' : 'Satus',
+            'status': 'Satus',
             'product_price': 'Cena produktów:',
             'transport_price': 'Cena transportu',
             'current_transport_price': 'Obecna cena tranposrtu',
             'customs_price': 'Oplaty celne (VAT i cło)',
             'total_weight': 'całkowita waga [kg]',
         }
+
+        widgets = {'date_of_order': forms.NumberInput(attrs={'type': 'date'})}
 
 class ProductForm(forms.ModelForm):
     class Meta:

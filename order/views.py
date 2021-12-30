@@ -8,7 +8,7 @@ def index(request):
 
 def order_list(request):
     object_list = Order.objects.all()
-    paginator = Paginator(object_list, 5)
+    paginator = Paginator(object_list, 10)
     page = request.GET.get('page')
     try:
         orders = paginator.page(page)
