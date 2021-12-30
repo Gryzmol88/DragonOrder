@@ -2,8 +2,8 @@
 
 {% block content %}
   <p>Dodanie nowego zamówienia:</p>
-    
-  <form action="{% url 'order:new_order' %}" method='post'>
+     <p><a href="{% url 'order:order_products' order.id %}">{{ order }}</a></p>
+  <form action="{% url 'order:new_product' order.id %}" method='post'>
     {% csrf_token %}
     {{ form.as_p }}
     <button name="submit">Zapisz</button>

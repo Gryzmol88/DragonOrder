@@ -1,0 +1,12 @@
+{% extends "order/base.html" %}
+
+{% block content %}
+  <h2>Edytowane zamówienie:</h2>
+
+  <form action="{% url 'order:edit_order' order.id %}" method='post'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Zapisz zmiany</button>
+  </form>
+<a href="{% url 'order:delete_order' order.id%}">Usuń zamówienie</a>
+{% endblock content %}

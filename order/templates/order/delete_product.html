@@ -1,0 +1,8 @@
+
+{% extends "order/base.html" %}
+
+{% block content %}
+  <h2>Usunięto produkt</h2>
+
+<a href="{% url 'order:order_products' order_products.id %}">Powrót</a>
+{% endblock content %}
