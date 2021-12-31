@@ -6,7 +6,7 @@ class OrderForm(forms.ModelForm):
         model = Order
 
         fields = ['name', 'date_of_order', 'status', 'product_price',
-                  'transport_price', 'current_transport_price',
+                  'transport_price',
                   'customs_price', 'total_weight']
 
         labels = {
@@ -15,12 +15,12 @@ class OrderForm(forms.ModelForm):
             'status': 'Satus',
             'product_price': 'Cena produktów:',
             'transport_price': 'Cena transportu',
-            'current_transport_price': 'Obecna cena tranposrtu',
             'customs_price': 'Oplaty celne (VAT i cło)',
             'total_weight': 'całkowita waga [kg]',
         }
 
         widgets = {'date_of_order': forms.NumberInput(attrs={'type': 'date'})}
+
 
 class ProductForm(forms.ModelForm):
     class Meta:

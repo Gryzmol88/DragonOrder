@@ -16,6 +16,8 @@ def order_list(request):
         orders = paginator.page(1)
     except EmptyPage:
         orders = paginator.page(paginator.num_pages)
+    #Odświeżenie bazy danych
+    refresh_order()
     context = {'orders': orders, 'page': page}
     return render(request, 'order/order_list.html', context)
 
@@ -92,3 +94,13 @@ def delete_product(request, product_id):
     product.delete()
     context = {'product': product, 'order_products': order_products}
     return render(request, 'order/delete_product.html', context)
+
+def refresh_order():
+    orders = Order.objects.all()
+    for order in orders:
+        products = Product.objects.filter(order=order.id)
+        all_items = 0
+        for product in products:
+            all_items += product.quantity
+        order.all_items = all_items
+        order.save()

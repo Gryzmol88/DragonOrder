@@ -2,6 +2,7 @@ from django.db import models
 from djmoney.models.fields import MoneyField
 
 
+
 class Order(models.Model):
     STATUS_CHOICES_ORDER = (
         ('W przygotowaniu', 'W przygotowaniu'),
@@ -10,19 +11,26 @@ class Order(models.Model):
         ('Dostarczono', 'Dostarczono'),
          )
 
-    CURRENT_CHOICES = (
-        ('PLN', 'PLN'),
-        ('USD', 'USD'),
-    )
 
     name = models.CharField(max_length=200)
     date_of_order = models.DateField()
     status = models.CharField(max_length=15, choices=STATUS_CHOICES_ORDER, default='W przygotowaniu')
+    #Koszt wszystkich produktow w USD
     product_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
+    #Koszt samego transportu w PLN lub USD
     transport_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
-    current_transport_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
-    customs_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
-    total_weight = models.IntegerField()
+    #Całkowita waga zamówienia
+    total_weight = models.FloatField()
+    #Całkowita ilość produktów.
+    all_items = models.IntegerField(default=0)
+    #Koszt transportu i cła
+    total_transport_price = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN', default=0)
+    #Koszt opłat celnych
+    customs_price = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN', default=0)
+    #opłaty dodatkowe za kg w PLN
+    fee_per_kg = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN', default=0)
+    #Całkowity koszt z oplatami w PLN
+    total_price = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN', default=0)
 
     class Meta:
         ordering = ('-date_of_order',)

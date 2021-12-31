@@ -29,6 +29,7 @@
         <th>Data</th>
         <th>Status</th>
         <th>Cena</th>
+        <th>Ilość produktów</th>
         <th>Akcja</th>
       </tr>
     </thead>
@@ -39,6 +40,7 @@
         <td>{{ order.date_of_order }}</td>
         <td>{{ order.status }}</td>
         <td>{{ order.product_price }}</td>
+        <td>{{ order.all_items }}</td>
         <td><a href="{% url 'order:edit_order' order.id %}" class="btn btn-info">Edytuj zamówienie</a></td>
     </tbody>
       {% endfor %}
