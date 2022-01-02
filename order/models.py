@@ -15,22 +15,25 @@ class Order(models.Model):
     name = models.CharField(max_length=200)
     date_of_order = models.DateField()
     status = models.CharField(max_length=15, choices=STATUS_CHOICES_ORDER, default='W przygotowaniu')
+    #Koszt wymiant z USD na PLN.
+    usd_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('PLN', 'PLN')], default=0)
     #Koszt wszystkich produktow w USD
-    product_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
+    product_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('USD', 'USD $')], default=0)
     #Koszt samego transportu w PLN lub USD
-    transport_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
+    transport_price = MoneyField(max_digits=8, decimal_places=2,
+                                 currency_choices=[('USD', 'USD $'), ('PLN', 'PLN')], default=0)
     #Całkowita waga zamówienia
-    total_weight = models.FloatField()
+    total_weight = models.FloatField(default=0)
     #Całkowita ilość produktów.
     all_items = models.IntegerField(default=0)
     #Koszt transportu i cła
-    total_transport_price = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN', default=0)
+    total_transport_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('PLN', 'PLN')], default=0)
     #Koszt opłat celnych
-    customs_price = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN', default=0)
+    customs_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('PLN', 'PLN')], default=0)
     #opłaty dodatkowe za kg w PLN
-    fee_per_kg = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN', default=0)
+    fee_per_kg = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('PLN', 'PLN')], default=0)
     #Całkowity koszt z oplatami w PLN
-    total_price = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN', default=0)
+    total_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('PLN', 'PLN')], default=0)
 
     class Meta:
         ordering = ('-date_of_order',)
@@ -42,10 +45,10 @@ class Order(models.Model):
 class Product(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=100)
-    weight = models.IntegerField()
-    purchase_row_price = MoneyField(max_digits=8, decimal_places=2, default_currency='USD')
+    weight = models.FloatField()
+    purchase_row_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('USD', 'USD $')])
     quantity = models.IntegerField()
-    purchase_final_price = MoneyField(max_digits=8, decimal_places=2, default_currency='PLN')
+    purchase_final_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('USD', 'USD $')])
 
     def __str__(self):
         return self.product_name

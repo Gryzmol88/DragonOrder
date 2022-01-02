@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Order, Product
 from .forms import OrderForm, ProductForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .counter import refresh_order
 
 def index(request):
     return render(request, 'order/index.html')
@@ -95,12 +96,4 @@ def delete_product(request, product_id):
     context = {'product': product, 'order_products': order_products}
     return render(request, 'order/delete_product.html', context)
 
-def refresh_order():
-    orders = Order.objects.all()
-    for order in orders:
-        products = Product.objects.filter(order=order.id)
-        all_items = 0
-        for product in products:
-            all_items += product.quantity
-        order.all_items = all_items
-        order.save()
+

@@ -5,18 +5,17 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
 
-        fields = ['name', 'date_of_order', 'status', 'product_price',
-                  'transport_price',
-                  'customs_price', 'total_weight']
+        fields = ['name', 'date_of_order', 'status', 'usd_price',
+                  'transport_price', 'customs_price']
 
         labels = {
             'name': 'Nazwa zamówienia:',
             'date_of_order': 'Data zakupu',
-            'status': 'Satus',
-            'product_price': 'Cena produktów:',
+            'status': 'Status',
+            'usd_price': 'Kurs wymiany USD',
             'transport_price': 'Cena transportu',
             'customs_price': 'Oplaty celne (VAT i cło)',
-            'total_weight': 'całkowita waga [kg]',
+
         }
 
         widgets = {'date_of_order': forms.NumberInput(attrs={'type': 'date'})}
