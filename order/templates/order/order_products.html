@@ -27,7 +27,8 @@
       <tr>
         <th>Nazwa produktu</th>
         <th>Ilość zamówiona</th>
-        <th>Cena Produktu</th>
+        <th>Cena zakupu samego produktu</th>
+        <th>Ostateczna cena zakupu</th>
         <th>Akcja</th>
       </tr>
     </thead>
@@ -36,6 +37,7 @@
       <tr>
         <td>{{ product }}</td>
         <td>{{product.quantity}}</td>
+        <td>{{product.purchase_row_price}}</td>
         <td>{{product.purchase_final_price}}</td>
         <td><a href="{% url 'order:edit_product' product.id %}" class="btn btn-info">Edytuj produkt</a></td>
     </tbody>

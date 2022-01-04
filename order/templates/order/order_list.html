@@ -32,6 +32,8 @@
         <th>Ilość produktów</th>
         <th>Waga zamówienia KG</th>
         <th>Koszt wszystkich produktów</th>
+        <th>Koszt transportu z cłem i VAT</th>
+        <th>Koszt za kg PLN</th>
         <th>Akcja</th>
       </tr>
     </thead>
@@ -45,6 +47,8 @@
         <td>{{ order.all_items }}</td>
         <td>{{ order.total_weight }}</td>
         <td>{{ order.product_price }}</td>
+        <td>{{ order.total_transport_price}}</td>
+        <td>{{ order.fee_per_kg}}</td>
         <td><a href="{% url 'order:edit_order' order.id %}" class="btn btn-info">Edytuj zamówienie</a></td>
     </tbody>
       {% endfor %}

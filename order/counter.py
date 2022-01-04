@@ -8,6 +8,9 @@ def refresh_order():
         order_weight(order)
         order_products_price(order)
         transport_customs_price(order)
+        calculate_fee_per_kg(order)
+        calculate_purchase_final_price(order)
+
 
 
 def order_items(order):
@@ -42,13 +45,29 @@ def order_products_price(order):
 def transport_customs_price(order):
     """"Obliczanie calkowitej wartości opłat dodatkowych (tranposrt plus cło)"""
     #Jeżeli transport jest w USD
+
     if order.transport_price.currency.code == 'USD':
 
-        order.total_transport_price = order.customs_price + (order.transport_price * order.usd_price)
+        order.total_transport_price = order.customs_price.amount + (order.transport_price.amount * order.usd_price.amount)
+        order.total_transport_price.currency.code = 'PLN'
         order.save()
     #Jeżeli transport jest w PLN
     else:
-        order.total_transport_price = order.customs_price + order.transport_price
+        order.total_transport_price = order.customs_price.amount + order.transport_price.amount
+        order.total_transport_price.currency.code = 'PLN'
         order.save()
 
+def calculate_fee_per_kg(order):
+    """Obliczenie opłat dodatkwoych za kg towaru w PLN"""
+    order.fee_per_kg = order.total_transport_price/order.total_weight
+    order.save()
 
+def calculate_purchase_final_price(order):
+    """Obliczenie ceny ostatecznej produktu w PLN"""
+    products = Product.objects.filter(order=order.id)
+    for product in products:
+        #OPŁATY DODATKOWE ZA KG * WAGA PRODUKTU + CENA PRODUKTU * KURS WYMIANY WALUTY
+        product.purchase_final_price = (product.weight * order.fee_per_kg)
+                                       #+ (product.purchase_row_price.amount * order.usd_price.amount)
+        product.purchase_final_price.currency.code = 'PLN'
+        product.save()

@@ -26,12 +26,11 @@ class ProductForm(forms.ModelForm):
         model = Product
 
         fields = ['product_name', 'weight', 'purchase_row_price',
-                  'quantity', 'purchase_final_price']
+                  'quantity']
         labels = {
             'product_name': 'Nazwa produktu',
             'weight': 'Waga',
             'purchase_row_price': 'Cena zakupu',
-            'quantity': 'Ilość',
-            'purchase_final_price': 'Ostateczna cena',
+            'quantity': 'Ilość'
         }
 

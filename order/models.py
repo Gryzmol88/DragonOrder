@@ -48,7 +48,7 @@ class Product(models.Model):
     weight = models.FloatField()
     purchase_row_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('USD', 'USD $')])
     quantity = models.IntegerField()
-    purchase_final_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('USD', 'USD $')])
+    purchase_final_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('PLN', 'PLN')], default=0)
 
     def __str__(self):
         return self.product_name
