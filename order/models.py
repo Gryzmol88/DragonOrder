@@ -45,7 +45,7 @@ class Order(models.Model):
 class Product(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product_name = models.CharField(max_length=100)
-    weight = models.FloatField()
+    weight = models.DecimalField(decimal_places=2, max_digits=8)
     purchase_row_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('USD', 'USD $')])
     quantity = models.IntegerField()
     purchase_final_price = MoneyField(max_digits=8, decimal_places=2, currency_choices=[('PLN', 'PLN')], default=0)
