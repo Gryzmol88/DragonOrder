@@ -97,3 +97,15 @@ def delete_product(request, product_id):
     return render(request, 'order/delete_product.html', context)
 
 
+def wh_product_list(request):
+    all_products = Product.objects.all()
+    products_list = []
+    for product in all_products:
+        products_list.append(product.product_name)
+
+    #Usunięcie duplikatów. Otrzymujemy liste z nazwami produtków bez duplikatów.
+    products = list(set(products_list))
+    context = {'products': products}
+    return render(request, 'wh/wh_product_list.html', context)
+
+

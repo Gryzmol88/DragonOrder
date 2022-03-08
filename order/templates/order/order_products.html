@@ -14,12 +14,28 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
   <div class="jumbotron">
-    <h1 class="display-3">Lista produktów</h1>
+    <h1 class="display-3">Zamówienie: {{order_products.name}}</h1>
       <a href="{% url 'order:new_product' order_products.id%}">Dodaj nowy produkt</a>
   </div>
 {% endblock page_header %}
 {% block content %}
 <body>
+<h3>Dane zamówienia:</h3>
+<p>Nazwa zamówienia: {{order_products.name}}</p>
+<p>Data: {{order_products.date_of_order}}</p>
+<p>Status: {{order_products.status}}</p>
+<p>Kurs USD: {{order_products.usd_price}}</p>
+<p>Koszt produktów: {{order_products.product_price}}</p>
+<p>Koszt transportu: {{order_products.transport_price}}</p>
+<p>Waga zamówienia [kg]: {{order_products.total_weight}}</p>
+<p>Ilość produktów: {{order_products.all_items}}</p>
+<p>Koszt transportu i cła: {{order_products.total_transport_price}}</p>
+<p>Koszt cła i VAT: {{order_products.customs_price}}</p>
+<p>Opłaty dodatkowe za kg: {{order_products.fee_per_kg}}</p>
+<p>Całkowity koszt z opłatami: {{order_products.total_price}}</p>
+
+
+<h3>Lista produktów</h3>
 <div class="container">
 
   <table class="table">

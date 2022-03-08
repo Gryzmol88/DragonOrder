@@ -41,13 +41,27 @@
 
   <main role="main" class="container">
     <div class="pb-2 mb-2 border-bottom">
-      {% block page_header %}{% endblock page_header %}
+      {% block page_header %} <div class="jumbotron">
+    <h1 class="display-3">Lista produktów</h1>
+
+    <p class="lead">Wszystkie produkty na stanie </p>
+
+  </div>
+
+      {% endblock page_header %}
     </div>
     <div>
-      {% block content %}{% endblock content %}
+      {% block content %}
+
+        {% for product in products %}
+<p>{{product}} </p>
+{% endfor %}
+
+{% endblock content %}
     </div>
   </main>
 
 </body>
 
 </html>
+

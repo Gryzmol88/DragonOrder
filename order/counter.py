@@ -9,6 +9,7 @@ def refresh_order():
         order_products_price(order)
         transport_customs_price(order)
         calculate_fee_per_kg(order)
+        calculate_total_price(order)
         calculate_purchase_final_price(order)
 
 
@@ -63,6 +64,12 @@ def calculate_fee_per_kg(order):
         order.fee_per_kg = order.total_transport_price/order.total_weight
         order.save()
 
+def calculate_total_price(order):
+    """Obliczanie całkowitej ceny zamówienia w PLN"""
+    # Koszt wszystkich produktow w USD * Koszt wymiant z USD na PLN + Koszt transportu i cła
+    order.total_price = (order.product_price.amount * order.usd_price.amount) + order.total_transport_price.amount
+    order.total_price.currency.code = 'PLN'
+    order.save()
 
 def calculate_purchase_final_price(order):
     """Obliczenie ceny ostatecznej produktu w PLN"""
